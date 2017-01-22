@@ -1,0 +1,164 @@
+\documentclass{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{hyperref}
+
+\newcommand{\pder}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\tder}[2]{\frac{d#1}{d#2}}
+\newcommand{\rmax}{ r_\text{max} } 
+\renewcommand{\sinh}{\operatorname{sh}}
+\renewcommand{\tanh}{\operatorname{th}}
+
+
+\begin{document}
+
+We define ``instantaneous discomfort'' as the square of the proper acceleration. It is clear that if $\beta(\tau) = 0$ then the proper acceleration is $a = \tder{\beta}{\tau} = \tder{r}{\tau}$ where $r$ is the rapidity $r = \tanh^{-1}(\beta)$. However the last expression for $a$ is covariant (only if movement is restricted in one dimension!) and so holds in general.
+
+Thus the total discomfort can be defined as the functional
+
+\begin{equation}
+	F = \int a^2 d\tau = \int \left( \tder{r}{\tau} \right)^2 d\tau
+	\label{}
+\end{equation}
+
+We now formulate the two distinct problems A and B: we assume a distance $X$ between two points and a duration of time $T$ are given. Since the problem concerns the minimization of a functional depending on the second derivative of $x(t)$, the actual natural variable for a Lagrangian formulation is the first derivative, $\beta$ or $r$. So, over all worldlines $\beta(x)$ we minimize $F$, which takes the form:
+
+\begin{equation}
+	\int_0^X \left( \tder{r}{x} \right)^2 \sinh r dx
+	\label{}
+\end{equation}
+
+subject to the boundary conditions
+
+\begin{equation}
+	\beta(x = 0) = 0\,,\quad \beta(x = T) = 0
+	\label{}
+\end{equation}
+
+and the constraint, for problem A:
+
+\begin{equation}
+	\int_0^X \frac{dx}\beta = T
+	\label{}
+\end{equation}
+
+(which means the total coordinate time elapsed is $T$) and for problem B:
+
+\begin{equation}
+	\int_0^X \frac{dx}{\beta\gamma} 
+	\label{}
+\end{equation}
+
+or: the total proper time is $T$.
+
+The total time constraint (of either type) is clearly necessary, since $F$ can otherwise be made arbitrarily small by making the trip slower (e.g rescaling time). And the boundary conditions are essential because otherwise the solution is stupid.
+
+\subsection*{Problem B}
+
+We attempt a solution to B by inverting the problem statement and using $\tau$ as a parameter for integrating a Lagrangian instead of $x$, while we impose that the total space travelled is $X$ as a constraint. This means we minimize
+
+\begin{equation}
+	F = \int_0^T \left( \tder{r}{t} \right)^2 d\tau 
+	\label{}
+\end{equation}
+
+with boundary conditions $r(\tau=0) = r(\tau=T) = 0$ and with the constraint
+
+\begin{equation}
+	\int \sinh r d\tau = X
+	\label{}
+\end{equation}
+
+This means we have an effective Lagrangian 
+
+\begin{equation}
+	L = \left( \tder{r}{\tau} \right)^2 - \lambda \sinh r
+	\label{lagra}
+\end{equation}
+
+where a Lagrangian multiplier $\lambda$ has been introduced to take the constraint into account. The minus sign is for later convenience. We can immediately see \eqref{lagra} is the Lagrangian for a particle moving in a potential
+
+\begin{equation}
+	U(r) = \frac{\lambda}{2} \sinh r
+	\label{}
+\end{equation}
+
+The map is $r \leftrightarrow$ particle position, $a = \tder{r}{\tau} \leftrightarrow$ particle velocity. And for completeness, the eom is
+
+\begin{equation}
+	\ddot r = - \frac{\lambda}{2} \cosh r\,.
+	\label{}
+\end{equation}
+
+Now, we expect that $r$ starts at $0$, becomes positive, reaches a maximum at $T/2$, and then lowers back to $0$ at $\tau = T$. That can only happen if $\lambda$ is positive, which justifies our sign choice. We know there must be a monotonic relationship between $\lambda$ and $X$ which can be definitely found in principle if one has the general solution to the equations of motion. The abstract procedure is
+
+\begin{itemize}
+	\item Find the solution to the EL equation of \eqref{lagra}, with initial conditions $r(0) = 0$, $\dot r(0) = a_0$, parametrized by $(\lambda,a_0)$.
+	\item Find $T>0$ such that $r(T;\lambda,a_0) = 0$. This gives $T$ as a function of $(\lambda,a_0)$.
+	\item Integrate $\int \sinh r  d\tau$ over the solution to find $X$ as function of $(\lambda,a_0)$.
+	\item Presumably invert the relation to find $(\lambda,a_0)$ as function of $(X,T)$.
+\end{itemize}
+
+We can attempt a solution of the EL equations by introducing a special function related to elliptic integrals. We know the energy of the particle
+
+\begin{equation}
+	E = \frac{1}{2} \dot r^2 + \frac{\lambda}{2} \sinh r
+	\label{}
+\end{equation}
+
+is conserved, and is in particular $2E = \lambda \sinh \rmax $, which means
+
+\begin{equation}
+	\dot r = \pm \sqrt{ \lambda \sinh \rmax  - \lambda \sinh r }
+	\label{}
+\end{equation}
+
+\begin{equation}
+	\Rightarrow \pm \frac{dr}{\sqrt{1 - \dfrac{\sinh r }{\sinh \rmax } } } = \sqrt{\lambda \sinh \rmax }d\tau
+	\label{separated}
+\end{equation}
+
+The two signs of the radical are for $\tau<T/2$ and $\tau>T/2$.
+
+We define the following ``imaginary elliptic integral'':
+
+\begin{equation}
+	L(r|\alpha^2) := \int_0^r \frac{ds}{\sqrt{1-\alpha^2 \sinh(s) } }
+	\label{}
+\end{equation}
+
+which is easily seen to be an evaluation of the elliptic integral of the first kind for imaginary amplitude and imaginary elliptic parameter. Not that that is an enlightening fact in any way. Anyway if $L$ is given then (since $L(0|\alpha^2) = 0$)
+
+\begin{equation}
+	\sqrt{\lambda \sinh(\rmax)}\, \tau = L(r \,|\, (\sinh(\rmax))^{-1} ) 
+	\label{solution}
+\end{equation}
+
+so that should be $\tau(r)$ with parameters $(\lambda,\rmax)$ which can in principle be inverted to get $r(\tau)$. This actually only holds with $\tau$ from $0$ to $T/2$, where there is a maximum, then $r(\tau)$ continues symmetrically until $\tau = T$. (Notice that $d\tau/dr$ honourably diverges for $r\sim \rmax$, matching our expectation for that to be a maximum in $r(\tau)$). To restate what was said previously, this \emph{is} the general solution to the equations. The only problem is mapping our original parameters $(X,T)$ to the parameters $(\lambda,\rmax)$
+
+Speaking of $T$, it can be found as the solution to $r(T/2) = \rmax$, which means from \eqref{solution}
+
+\begin{equation}
+	T/2 = \frac{1}{\sqrt{\lambda \sinh \rmax  } } L(\rmax | (\sinh \rmax )^{-1}) = \frac{1}{\sqrt{\lambda \sinh\rmax } } \int_0^{\rmax} \frac{ds}{\sqrt{1-\sinh s /\sinh \rmax  } }
+	\label{}
+\end{equation}
+
+Thus $T$ can be expressed numerically as a function of $(\lambda,\rmax)$ in one integral.
+
+A similar computation yields $X$ as an integral too:
+
+\begin{equation}
+	X = \int_0^T \sinh r  d\tau = 2 \int_0^{T/2} \sinh r d\tau 
+	\label{}
+\end{equation}
+
+and then using \eqref{separated}:
+
+\begin{equation}
+	= \frac{2}{\sqrt{\lambda \sinh \rmax  } } \int_0^{\rmax} \frac{\sinh r}{\sqrt{1- \dfrac{\sinh r}{\sinh \rmax }}} dr
+\end{equation}
+
+\end{document}
